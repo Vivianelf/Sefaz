@@ -1,0 +1,99 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	
+	<h:head>
+<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:panelGrid id="gridCampos" style="width: 50%">
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Nome: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:inputText />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Cpf: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:inputText />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Livro: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:inputText />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:commandButton value="Pesquisar" update="@form"
+						 actionListener="#{PessoaBean.pesquisar}"/>
+				</p:column>
+				<p:column>
+					<p:commandButton value="Limpar" update="gridCampos" process="@this"  
+					actionListener="#{PessoaBean.limpar}">
+		                <p:resetInput target="gridCampos" />
+		            </p:commandButton>
+				</p:column>
+				<p:column>
+					<p:commandButton value="Criar Pessoa" updta="@form" 
+					actionListener="#{PessoaBean.abrirManterPessoa}" />
+				</p:column>
+
+			</p:row>
+		</p:panelGrid>
+
+		<p:panel header="Lista de Pessoas" style="margin-bottom:10px; width: 49%">
+			<p:dataTable  var="pessoa" value="#{PessoaBean.listaPessoa}">
+				<p:column headerText="Nome">
+					<h:outputText value="#{pessoa.nome}" />
+				</p:column>
+				<p:column headerText="Cpf">
+					<h:outputText value="#{pessoa.cpf}" />
+				</p:column>
+				<p:column headerText="Idade">
+					<h:outputText value="#{pessoa.idade}" />
+				</p:column>
+				<p:column headerText="Sexo">
+					<h:outputText value="#{pessoa.sexo}" />
+				</p:column>
+				<p:column headerText="Editar" width="15%">
+					<p:commandButton icon="pi pi-pencil" action="#{PessoaBean.editar}"> 
+						<f:setPropertyActionListener
+							target="#{PessoaBean.cpfSelecionado}"
+							value="#{pessoa.cpf}" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Remover" width="15%">
+					<p:commandButton icon="pi pi-times" updta="@form" action="#{PessoaBean.remover}">
+					<f:setPropertyActionListener 
+							target="#{PessoaBean.cpfSelecionado}"
+							value="#{pessoa.cpf}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
+	
+	
+	
+	
+	
+	
+	
+	
